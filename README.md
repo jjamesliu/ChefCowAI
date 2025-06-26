@@ -1,8 +1,11 @@
 # Chef Cow AI
+Utilizes HuggingFace Interface and uses [Mistralai](https://mistral.ai/) model for recipe generation. 
+
 
 ## Tech Stack
 Library: React<br/>
-Deployment: Vite<br/>
+Build Tool: Vite<br/>
+Deployment: Netlify<br/>
 CSS Framework: TailwindCSS<br/>
 
 
