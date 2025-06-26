@@ -1,5 +1,5 @@
 # Chef Cow AI
-Utilizes HuggingFace Interface and uses [Mistralai](https://mistral.ai/) model for recipe generation. 
+## Utilizes HuggingFace Interface and uses [MistralAI](https://mistral.ai/) model for recipe generation. 
 
 
 ## Tech Stack
