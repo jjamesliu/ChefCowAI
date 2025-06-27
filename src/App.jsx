@@ -29,10 +29,27 @@ function App() {
 
    const [generatedRecipe, setGeneratedRecipe] = useState("")
    async function handleGeneratedRecipe() {
-      const markdown = await getRecipeFromMistral(ingredients);
-      setGeneratedRecipe(markdown);
-      console.log("Raw Markdown Output:\n", markdown);
-      getRecipe();
+   try {
+      const response = await fetch("/.netlify/functions/handleRecipes", {
+         method: "POST",
+         headers: {
+         "Content-Type": "application/json"
+         },
+         body: JSON.stringify({ ingredients })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+         setGeneratedRecipe(data.content);
+         console.log("Raw Markdown Output:\n", data.content);
+         getRecipe(); // triggers rendering
+      } else {
+         console.error("API error:", data.error);
+      }
+   } catch (err) {
+      console.error("Fetch error:", err.message);
+   }
    }
 
    return (
