@@ -53,7 +53,6 @@ function App() {
       }
    } catch (err) {
       console.error("Fetch error:", err.message);
-      setTimeout(() => handleGeneratedRecipe(), 5000);
    }
    }
 
