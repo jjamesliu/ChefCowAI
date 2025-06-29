@@ -38,17 +38,22 @@ function App() {
          body: JSON.stringify({ ingredients })
       });
 
+      if (!response.ok) {
+         throw new Error('Warming up the AI');
+      }
+
       const data = await response.json();
 
       if (response.ok) {
          setGeneratedRecipe(data.content);
          console.log("Raw Markdown Output:\n", data.content);
-         getRecipe(); // triggers rendering
+         getRecipe(); 
       } else {
          console.error("API error:", data.error);
       }
    } catch (err) {
       console.error("Fetch error:", err.message);
+      setTimeout(() => handleGeneratedRecipe(), 200);
    }
    }
 
