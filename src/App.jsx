@@ -38,10 +38,6 @@ function App() {
          body: JSON.stringify({ ingredients })
       });
 
-      if (!response.ok) {
-         throw new Error('Warming up the AI');
-      }
-
       const data = await response.json();
 
       if (response.ok) {
