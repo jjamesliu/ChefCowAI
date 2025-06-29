@@ -1,16 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import Header from './Header.jsx'
 import FridgeInput from './FridgeInput.jsx'
 import RecipeForm from './RecipeForm.jsx'
 import GeneratedRecipe from './GeneratedRecipe.jsx'
-import { getRecipeFromMistral } from './ai.js'
 
 function App() {
    const [ingredients, setIngredients] = useState([])
    const [recipeStatus, setRecipeStatus] = useState(false)
    const [error, setError] = useState(false)
+
+   const warmup = async () => {
+         await fetch("/.netlify/functions/handleRecipes", {
+            headers: {
+               "x-warm-up": "true"
+            }
+         })
+         console.log('function warming up')
+   }
+   
+   useEffect( () => {
+      warmup();
+   }, []);
 
     function getRecipe() {
       setRecipeStatus(true)

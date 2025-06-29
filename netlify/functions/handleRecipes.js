@@ -11,6 +11,13 @@ too many extra ingredients. Format your response in markdown to make it easier t
 `;
 
 exports.handler = async function(event, context) {
+  if (event.headers['x-warm-up'] === 'true') {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({message: "Warm-up ping."})
+    }
+  }
+
   const { ingredients } = JSON.parse(event.body);
   const ingredientsString = ingredients.join(", ");
 
