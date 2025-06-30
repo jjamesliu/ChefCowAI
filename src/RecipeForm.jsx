@@ -10,9 +10,15 @@ function RecipeForm(props) {
                 <h3 className='text-black/50'>Generate a recipe with your ingredients</h3>
             </div>
             <div>
+                {props.loading ? (
+                    <div className="animate-pulse text-white bg-[#cca77e] p-4 rounded-2xl font-semibold text-lg">
+                        <p className='text-center'> 🍳 Generating your recipe...</p>
+                    </div>
+                ) : (
                 <button className="bg-[#cca77e] hover:bg-[#fcce9d] text-white font-semibold p-4 rounded-2xl" 
                 onClick={props.handleGeneratedRecipe}
-                >Generate Recipe</button>
+                >Generate Recipe</button> 
+                )}
             </div>
         </div>
         </>

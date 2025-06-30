@@ -10,6 +10,7 @@ function App() {
    const [ingredients, setIngredients] = useState([])
    const [recipeStatus, setRecipeStatus] = useState(false)
    const [error, setError] = useState(false)
+   const [loading, setLoading] = useState(false)
 
    const warmup = async () => {
          await fetch("/.netlify/functions/handleRecipes", {
@@ -41,6 +42,7 @@ function App() {
 
    const [generatedRecipe, setGeneratedRecipe] = useState("")
    async function handleGeneratedRecipe() {
+   setLoading(true);
    try {
       const response = await fetch("/.netlify/functions/handleRecipes", {
          method: "POST",
@@ -61,6 +63,8 @@ function App() {
       }
    } catch (err) {
       console.error("Fetch error:", err.message);
+   } finally {
+      setLoading(false);
    }
    }
 
@@ -68,7 +72,7 @@ function App() {
    <div className='bg-[#FFF7F0] min-h-screen'>
       <Header />
       <FridgeInput ingredients={ingredients} addIngredient={addIngredient} error={error}/>
-      <RecipeForm handleGeneratedRecipe={handleGeneratedRecipe}/>
+      <RecipeForm handleGeneratedRecipe={handleGeneratedRecipe} loading={loading} setLoading={setLoading}/>
       <GeneratedRecipe status={recipeStatus} generatedRecipe={generatedRecipe}/>
    </div>
    )
