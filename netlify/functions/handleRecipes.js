@@ -1,7 +1,6 @@
-// /netlify/functions/getRecipe.js
 const { InferenceClient } = require("@huggingface/inference");
 
-const hf = new InferenceClient(process.env.HF_TOKEN);
+const hf = new InferenceClient(process.env.VITE_HF_TOKEN);
 
 const SYSTEM_PROMPT = `
 You are an assistant that receives a list of ingredients that a user has and suggests a recipe they 
